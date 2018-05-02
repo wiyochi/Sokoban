@@ -10,7 +10,10 @@ Board::Board(int w, int h) :
 		m_cases[i] = new Case*[m_height];
 		for (int j = 0; j < m_height; ++j)
 		{
-			m_cases[i][j] = new Case();
+			if(i == 1)
+				m_cases[i][j] = new Wall();
+			else
+				m_cases[i][j] = new Target();
 		}
 	}
 }

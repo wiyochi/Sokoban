@@ -6,20 +6,9 @@
 class Case
 {
 public:
-	enum type
-	{
-		empty,
-		wall,
-		target
-	};
-
 	Case();
 	~Case();
 	void draw();
-
-private:
-	Case::type m_type;
-	
 };
 
 #endif

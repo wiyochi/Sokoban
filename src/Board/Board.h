@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include "Case/Case.h"
+#include "Case/Target.h"
+#include "Case/Wall.h"
 
 class Board
 {
