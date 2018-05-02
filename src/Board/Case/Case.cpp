@@ -10,5 +10,5 @@ Case::~Case()
 
 void Case::draw()
 {
-	std::cout << "  ";
+	std::cout << ". ";
 }

@@ -11,5 +11,5 @@ Target::~Target()
 
 void Target::draw()
 {
-	std::cout << ". ";
+	std::cout << "o ";
 }

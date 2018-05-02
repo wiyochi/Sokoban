@@ -1,11 +1,14 @@
 #include <iostream>
 #include "Board/Board.h"
+#include "Level/Level.h"
 
 int main(int argc, char const *argv[])
 {
-	Board* b = new Board(8, 8);
+	Level* l = new Level();
 
-	b->draw();
+	l->load("niveau2.txt");
+
+	l->draw();
 
 	return 0;
 }

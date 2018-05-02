@@ -1,6 +1,6 @@
 #include "Board.h"
 
-Board::Board(int w, int h) :
+Board::Board(int w, int h, char** layout) :
 	m_width(w),
 	m_height(h)
 {
@@ -10,10 +10,18 @@ Board::Board(int w, int h) :
 		m_cases[i] = new Case*[m_height];
 		for (int j = 0; j < m_height; ++j)
 		{
-			if(i == 1)
-				m_cases[i][j] = new Wall();
-			else
-				m_cases[i][j] = new Target();
+			switch(layout[i][j])
+			{
+				case '.':
+					m_cases[i][j] = new Case();
+					break;
+				case '#':
+					m_cases[i][j] = new Wall();
+					break;
+				case 'o':
+					m_cases[i][j] = new Target();
+					break;
+			}
 		}
 	}
 }
@@ -26,9 +34,9 @@ Board::~Board()
 		{
 			delete m_cases[i][j];
 		}
-		delete m_cases[i];
+		delete[] m_cases[i];
 	}
-	delete m_cases;
+	delete[] m_cases;
 }
 
 void Board::draw()

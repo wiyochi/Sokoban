@@ -14,7 +14,7 @@ private:
 	int m_height;
 
 public:
-	Board(int w, int h);
+	Board(int w, int h, char** layout);
 	~Board();
 	void draw();
 };
