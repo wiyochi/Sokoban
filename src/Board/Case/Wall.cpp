@@ -10,7 +10,7 @@ Wall::~Wall()
 {
 }
 
-void draw()
+void Wall::draw()
 {
 	std::cout << "# ";
 }

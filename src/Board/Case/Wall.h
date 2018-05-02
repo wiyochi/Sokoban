@@ -9,7 +9,7 @@ class Wall : public Case
 public:
 	Wall();
 	~Wall();
-	void draw();
+	virtual void draw();
 };
 
 #endif

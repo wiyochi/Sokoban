@@ -9,7 +9,7 @@ class Target : public Case
 public:
 	Target();
 	~Target();
-	void draw();
+	virtual void draw();
 	
 };
 

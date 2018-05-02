@@ -8,7 +8,7 @@ class Case
 public:
 	Case();
 	~Case();
-	void draw();
+	virtual void draw();
 };
 
 #endif
