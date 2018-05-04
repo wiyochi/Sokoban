@@ -17,8 +17,14 @@ void Level::load(const char* path)
 
 	if(file)
 	{
-		file >> m_nLevel >> m_wBoard >> m_hBoard >> m_idk;
-		file.seekg(2, std::ios::cur);
+		getline(file, strTmp);
+		std::istringstream(strTmp) >> m_nLevel;
+		getline(file, strTmp);
+		std::istringstream(strTmp) >> m_wBoard;
+		getline(file, strTmp);
+		std::istringstream(strTmp) >> m_hBoard;
+		getline(file, strTmp);
+		std::istringstream(strTmp) >> m_idk;
 		
 		m_layout = new char*[m_wBoard];
 		for (int i = 0; i < m_wBoard; ++i)
@@ -33,11 +39,13 @@ void Level::load(const char* path)
 		}
 
 		file.close();
+
+		m_board = new Board(m_wBoard, m_hBoard, m_layout);
 	}
 	else
+	{
 		std::cerr << "Can't load level file" << std::endl;
-		
-	m_board = new Board(m_wBoard, m_hBoard, m_layout);
+	}
 }
 
 void Level::draw()

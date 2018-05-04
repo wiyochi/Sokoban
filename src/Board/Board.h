@@ -5,6 +5,7 @@
 #include "Case/Case.h"
 #include "Case/Target.h"
 #include "Case/Wall.h"
+#include "Point.h"
 
 class Board
 {
@@ -19,4 +20,4 @@ public:
 	void draw();
 };
 
-#endif
+#endif /*_BOARD_H_*/

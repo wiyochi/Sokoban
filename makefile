@@ -26,6 +26,7 @@ objet =
 #-----Main rule---------------------------------
 all: $(OBJ)
 	$(CXX) $(CXXFLAGS) -o ${EXEDST}/${PRODUCT} $(OBJPATH)
+	${EXEDST}/${PRODUCT}
 
 #-----Other stuff----------------------------
 depend:

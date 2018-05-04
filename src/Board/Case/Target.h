@@ -7,10 +7,10 @@
 class Target : public Case
 {
 public:
-	Target();
+	Target(const Point& p);
 	~Target();
 	virtual void draw();
 	
 };
 
-#endif
+#endif /*_TARGET_H_*/

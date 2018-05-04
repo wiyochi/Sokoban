@@ -7,9 +7,9 @@
 class Wall : public Case
 {
 public:
-	Wall();
+	Wall(const Point& p);
 	~Wall();
 	virtual void draw();
 };
 
-#endif
+#endif /*_WALL_H_*/

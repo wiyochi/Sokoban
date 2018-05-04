@@ -13,13 +13,24 @@ Board::Board(int w, int h, char** layout) :
 			switch(layout[i][j])
 			{
 				case '.':
-					m_cases[i][j] = new Case();
+					m_cases[i][j] = new Case(*(new Point(i, j)));
 					break;
 				case '#':
-					m_cases[i][j] = new Wall();
+					m_cases[i][j] = new Wall(*(new Point(i, j)));
 					break;
 				case 'o':
-					m_cases[i][j] = new Target();
+					m_cases[i][j] = new Target(*(new Point(i, j)));
+					break;
+				case '@':
+					m_cases[i][j] = new Case(*(new Point(i, j)));
+					m_cases[i][j]->hasPlayer(true);
+					break;
+				case '$':
+					m_cases[i][j] = new Case(*(new Point(i, j)));
+					m_cases[i][j]->hasBox(true);
+					break;
+				default:
+					m_cases[i][j] = new Case(*(new Point(i, j)));
 					break;
 			}
 		}
@@ -46,6 +57,7 @@ void Board::draw()
 		for (int j = 0; j < m_height; ++j)
 		{
 			m_cases[i][j]->draw();
+			std::cout << " ";
 		}
 		std::cout << std::endl;
 	}

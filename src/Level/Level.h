@@ -1,5 +1,9 @@
+#ifndef _LEVEL_H_
+#define _LEVEL_H_
+
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include "../Board/Board.h"
 
 class Level
@@ -18,3 +22,5 @@ public:
 	void load(const char*);
 	void draw();
 };
+
+#endif /*_LEVEL_H_*/

@@ -2,13 +2,23 @@
 #define _CASE_H_
 
 #include <iostream>
+#include "../Point.h"
 
 class Case
 {
 public:
-	Case();
+	Case(const Point& p);
 	~Case();
 	virtual void draw();
+	bool hasBox();
+	bool hasPlayer();
+	void hasBox(bool b);
+	void hasPlayer(bool b);
+
+protected:
+	Point m_position;
+	bool m_hasBox;
+	bool m_hasPlayer;
 };
 
-#endif
+#endif /*_CASE_H_*/
