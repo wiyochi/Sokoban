@@ -13,7 +13,7 @@ void Target::draw()
 {
 	if(m_hasBox)
 		std::cout << "$";
-	else if(m_hasPlayer)
+	else if(m_hasPawn)
 		std::cout << "@";
 	else
 		std::cout << ".";

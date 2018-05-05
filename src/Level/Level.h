@@ -14,13 +14,22 @@ private:
 	int m_nLevel;
 	int m_wBoard;
 	int m_hBoard;
-	int m_idk;
+	int m_nBox;
 
 public:
+	enum dir
+	{
+		top,
+		right,
+		bottom,
+		left
+	};
+
 	Level();
 	~Level();
 	void load(const char*);
 	void draw();
+	void move(dir d);
 };
 
 #endif /*_LEVEL_H_*/

@@ -24,7 +24,7 @@ void Level::load(const char* path)
 		getline(file, strTmp);
 		std::istringstream(strTmp) >> m_hBoard;
 		getline(file, strTmp);
-		std::istringstream(strTmp) >> m_idk;
+		std::istringstream(strTmp) >> m_nBox;
 		
 		m_layout = new char*[m_wBoard];
 		for (int i = 0; i < m_wBoard; ++i)
@@ -51,4 +51,19 @@ void Level::load(const char* path)
 void Level::draw()
 {
 	m_board->draw();
+}
+
+void Level::move(dir d)
+{
+	switch(d)
+	{
+	case top:
+		break;
+	case right:
+		break;
+	case bottom:
+		break;
+	case left:
+		break;
+	}
 }

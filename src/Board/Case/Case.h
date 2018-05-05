@@ -11,14 +11,14 @@ public:
 	~Case();
 	virtual void draw();
 	bool hasBox();
-	bool hasPlayer();
+	bool hasPawn();
 	void hasBox(bool b);
-	void hasPlayer(bool b);
+	void hasPawn(bool b);
 
 protected:
 	Point m_position;
 	bool m_hasBox;
-	bool m_hasPlayer;
+	bool m_hasPawn;
 };
 
 #endif /*_CASE_H_*/

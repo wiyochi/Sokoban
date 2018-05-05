@@ -23,7 +23,7 @@ Board::Board(int w, int h, char** layout) :
 					break;
 				case '@':
 					m_cases[i][j] = new Case(*(new Point(i, j)));
-					m_cases[i][j]->hasPlayer(true);
+					m_cases[i][j]->hasPawn(true);
 					break;
 				case '$':
 					m_cases[i][j] = new Case(*(new Point(i, j)));

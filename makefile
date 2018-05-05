@@ -7,7 +7,7 @@ PRODUCT = sokoban
  
 
 #-----File Location----------------------
-SRCDST = src src/Board src/Board/Case src/Level
+SRCDST = src src/Board src/Board/Case src/Level src/Board/Entities
 OBJDST = obj/
 EXEDST = exe
  
@@ -34,5 +34,5 @@ depend:
  
 
 clean:
-	rm -f $(OBJ)
+	rm -f $(OBJPATH)
 	rm -f ${EXEDST}/${PRODUCT}
