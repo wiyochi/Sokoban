@@ -14,3 +14,8 @@ void Wall::draw()
 {
 	std::cout << "#";
 }
+
+std::string Wall::type()
+{
+	return "wall";
+}

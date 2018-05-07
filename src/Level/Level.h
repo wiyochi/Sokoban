@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <string>
 #include "../Board/Board.h"
 
 class Level
@@ -17,19 +18,12 @@ private:
 	int m_nBox;
 
 public:
-	enum dir
-	{
-		top,
-		right,
-		bottom,
-		left
-	};
-
 	Level();
 	~Level();
 	void load(const char*);
+	void update();
 	void draw();
-	void move(dir d);
+	void move(Board::Dir d);
 };
 
 #endif /*_LEVEL_H_*/

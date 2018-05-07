@@ -8,7 +8,10 @@ int main(int argc, char const *argv[])
 
 	l->load("niveau2.txt");
 
-	l->draw();
+	while(1)
+		l->update();
+
+	delete l;
 
 	return 0;
 }

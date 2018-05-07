@@ -10,6 +10,8 @@ struct Point
 	Point(int a, int b);
 	Point(const Point& p);
 	~Point();
+	void set(int a, int b);
+	void move(int a, int b);
 };
 
 #endif /*_POINT_H_*/

@@ -10,6 +10,7 @@ public:
 	Target(const Point& p);
 	~Target();
 	virtual void draw();
+	virtual std::string type();
 	
 };
 

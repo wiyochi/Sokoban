@@ -2,6 +2,7 @@
 #define _CASE_H_
 
 #include <iostream>
+#include <string>
 #include "../Point.h"
 
 class Case
@@ -10,6 +11,8 @@ public:
 	Case(const Point& p);
 	~Case();
 	virtual void draw();
+	virtual std::string type();
+	void drawDebug();
 	bool hasBox();
 	bool hasPawn();
 	void hasBox(bool b);

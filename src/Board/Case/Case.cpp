@@ -21,6 +21,16 @@ void Case::draw()
 		std::cout << " ";
 }
 
+std::string Case::type()
+{
+	return "classic";
+}
+
+void Case::drawDebug()
+{
+	std::cout << "(" << m_position.x << "," << m_position.y << ")";
+}
+
 bool Case::hasBox()
 {
 	return m_hasBox;

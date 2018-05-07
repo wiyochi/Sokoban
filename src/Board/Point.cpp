@@ -21,3 +21,15 @@ Point::Point(const Point& p) :
 Point::~Point()
 {
 }
+
+void Point::set(int a, int b)
+{
+	x = a;
+	y = b;
+}
+
+void Point::move(int a, int b)
+{
+	x += a;
+	y += b;
+}

@@ -24,6 +24,7 @@ Board::Board(int w, int h, char** layout) :
 				case '@':
 					m_cases[i][j] = new Case(*(new Point(i, j)));
 					m_cases[i][j]->hasPawn(true);
+					m_pawn = Point(i, j);
 					break;
 				case '$':
 					m_cases[i][j] = new Case(*(new Point(i, j)));
@@ -61,4 +62,29 @@ void Board::draw()
 		}
 		std::cout << std::endl;
 	}
+}
+
+void Board::move(Dir d)
+{
+	m_cases[m_pawn.x][m_pawn.y]->hasPawn(false);
+	switch(d)
+	{
+	case Board::top:
+		//if(m_pawn.x - 1 > 0 && m_cases[m_pawn.x - 1][m_pawn.y]->type() != "wall")
+			m_pawn.move(-1, 0);
+		break;
+	case Board::right:
+		//if(m_pawn.y + 1 < m_height && m_cases[m_pawn.x][m_pawn.y + 1]->type() != "wall")
+			m_pawn.move(0, 1);
+		break;
+	case Board::bottom:
+		//if(m_pawn.x + 1 < m_width && m_cases[m_pawn.x + 1][m_pawn.y]->type() != "wall")
+			m_pawn.move(1, 0);
+		break;
+	case Board::left:
+		//if(m_pawn.y - 1 > 0 && m_cases[m_pawn.x][m_pawn.y - 1]->type() != "wall")
+			m_pawn.move(0, -1);
+		break;
+	}
+	m_cases[m_pawn.x][m_pawn.y]->hasPawn(true);
 }

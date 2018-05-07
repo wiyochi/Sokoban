@@ -18,3 +18,8 @@ void Target::draw()
 	else
 		std::cout << ".";
 }
+
+std::string Target::type()
+{
+	return "target";
+}

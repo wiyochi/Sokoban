@@ -10,6 +10,7 @@ public:
 	Wall(const Point& p);
 	~Wall();
 	virtual void draw();
+	virtual std::string type();
 };
 
 #endif /*_WALL_H_*/

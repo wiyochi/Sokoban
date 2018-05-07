@@ -11,7 +11,6 @@ SRCDST = src src/Board src/Board/Case src/Level src/Board/Entities
 OBJDST = obj/
 EXEDST = exe
  
-
 #-----File List----------------------
 SRC = $(foreach dir,$(SRCDST),$(wildcard $(dir)/*.cpp))
 OBJPATH = $(addsuffix .o, $(basename $(foreach source,$(SRC),$(subst $(dir $(source)),$(OBJDST),$(source)))))
