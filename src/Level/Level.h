@@ -18,12 +18,20 @@ private:
 	int m_nBox;
 
 public:
+	enum Dir
+	{
+		top,
+		right,
+		bottom,
+		left
+	};
+
 	Level();
 	~Level();
 	void load(const char*);
 	void update();
 	void draw();
-	void move(Board::Dir d);
+	void move(Dir d);
 };
 
 #endif /*_LEVEL_H_*/

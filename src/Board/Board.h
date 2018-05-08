@@ -16,18 +16,11 @@ private:
 	Point m_pawn;
 
 public:
-	enum Dir
-	{
-		top,
-		right,
-		bottom,
-		left
-	};
-
 	Board(int w, int h, char** layout);
 	~Board();
 	void draw();
-	void move(Dir d);
+	void move(int dx, int dy);
+	Case& operator[](const Point& p);
 };
 
 #endif /*_BOARD_H_*/

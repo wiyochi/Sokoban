@@ -64,27 +64,21 @@ void Board::draw()
 	}
 }
 
-void Board::move(Dir d)
+void Board::move(int dx, int dy)
 {
-	m_cases[m_pawn.x][m_pawn.y]->hasPawn(false);
-	switch(d)
+	Point newPos(m_pawn.x + dx, m_pawn.y + dy);
+
+	if(newPos.x >= 0 && newPos.x < m_width
+		&& newPos.y >= 0 && newPos.y < m_height
+		&& m_cases[newPos.x][newPos.y]->type() != "wall")
 	{
-	case Board::top:
-		if(m_pawn.y - 1 >= 0 && m_cases[m_pawn.x][m_pawn.y - 1]->type() != "wall")
-			m_pawn.move(0, -1);
-		break;
-	case Board::right:
-		if(m_pawn.x + 1 < m_width && m_cases[m_pawn.x + 1][m_pawn.y]->type() != "wall")
-			m_pawn.move(1, 0);
-		break;
-	case Board::bottom:
-		if(m_pawn.y + 1 < m_height && m_cases[m_pawn.x][m_pawn.y + 1]->type() != "wall")
-			m_pawn.move(0, 1);
-		break;
-	case Board::left:
-		if(m_pawn.x - 1 >= 0 && m_cases[m_pawn.x - 1][m_pawn.y]->type() != "wall")
-			m_pawn.move(-1, 0);
-		break;
+		m_cases[m_pawn.x][m_pawn.y]->hasPawn(false);
+		m_pawn = newPos;
+		m_cases[m_pawn.x][m_pawn.y]->hasPawn(true);
 	}
-	m_cases[m_pawn.x][m_pawn.y]->hasPawn(true);
+}
+
+Case& Board::operator[](const Point& p)
+{
+	return *(m_cases[p.x][p.y]);
 }

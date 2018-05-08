@@ -76,16 +76,16 @@ void Level::update()
 	switch(moveDir)
 	{
 	case 4:
-		move(Board::left);
+		move(left);
 		break;
 	case 8:
-		move(Board::top);
+		move(top);
 		break;
 	case 6:
-		move(Board::right);
+		move(right);
 		break;
 	case 2:
-		move(Board::bottom);
+		move(bottom);
 		break;
 	default:
 		break;
@@ -97,7 +97,21 @@ void Level::draw()
 	m_board->draw();
 }
 
-void Level::move(Board::Dir d)
+void Level::move(Dir d)
 {
-	m_board->move(d);
+	switch(d)
+	{
+	case top:
+		m_board->move(0, -1);
+		break;
+	case right:
+		m_board->move(1, 0);
+		break;
+	case bottom:
+		m_board->move(0, 1);
+		break;
+	case left:
+		m_board->move(-1, 0);
+		break;
+	}
 }

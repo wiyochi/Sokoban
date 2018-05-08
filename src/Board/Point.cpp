@@ -18,6 +18,16 @@ Point::Point(const Point& p) :
 {
 }
 
+Point& Point::operator=(const Point& p)
+{
+	if(&p != this)
+	{
+		this->x = p.x;
+		this->y = p.y;
+	}
+	return *this;
+}
+
 Point::~Point()
 {
 }
@@ -32,4 +42,19 @@ void Point::move(int a, int b)
 {
 	x += a;
 	y += b;
+}
+
+bool Point::equal(const Point& p) const
+{
+	return (this->x == p.x && this->y == p.y);
+}
+
+bool operator==(const Point& p1, const Point& p2)
+{
+	return p1.equal(p2);
+}
+
+bool operator!=(const Point& p1, const Point& p2)
+{
+	return !(p1.equal(p2));
 }
