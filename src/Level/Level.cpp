@@ -31,11 +31,14 @@ void Level::load(const char* path)
 		for (int i = 0; i < m_wBoard; ++i)
 		{
 			m_layout[i] = new char[m_hBoard];
-			getline(file, strTmp);
+		}
 
-			for (int j = 0; j < m_hBoard; ++j)
+		for (int i = 0; i < m_hBoard; ++i)
+		{
+			getline(file, strTmp);
+			for (int j = 0; j < m_wBoard; ++j)
 			{
-				m_layout[i][j] = strTmp[j];
+				m_layout[j][i] = strTmp[j];
 			}
 		}
 
