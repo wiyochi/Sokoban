@@ -8,8 +8,11 @@ int main(int argc, char const *argv[])
 
 	l->load("niveau2.txt");
 
-	while(1)
+	while(!l->win())
 		l->update();
+
+	l->draw();
+	std::cout << "############### END ###############" << std::endl;
 
 	delete l;
 

@@ -32,6 +32,7 @@ public:
 	void update();
 	void draw();
 	void move(Dir d);
+	bool win();
 };
 
 #endif /*_LEVEL_H_*/

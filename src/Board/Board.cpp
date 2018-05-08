@@ -1,9 +1,13 @@
 #include "Board.h"
 
-Board::Board(int w, int h, char** layout) :
+Board::Board(int w, int h, int nBoxes, char** layout) :
 	m_width(w),
-	m_height(h)
+	m_height(h),
+	m_nBoxes(nBoxes)
 {
+	int indexBoxes(0);
+	m_boxes = new Point*[m_nBoxes];
+
 	m_cases = new Case**[m_width];
 	for (int i = 0; i < m_width; ++i)
 	{
@@ -29,6 +33,8 @@ Board::Board(int w, int h, char** layout) :
 				case '$':
 					m_cases[i][j] = new Case(*(new Point(i, j)));
 					m_cases[i][j]->hasBox(true);
+					m_boxes[indexBoxes] = new Point(i, j);
+					indexBoxes++;
 					break;
 				default:
 					m_cases[i][j] = new Case(*(new Point(i, j)));
@@ -66,16 +72,67 @@ void Board::draw()
 
 void Board::move(int dx, int dy)
 {
-	Point newPos(m_pawn.x + dx, m_pawn.y + dy);
+	Point firstNextCase(m_pawn.x + dx, m_pawn.y + dy);
+	Point secondNextCase(firstNextCase.x + dx, firstNextCase.y + dy);
 
-	if(newPos.x >= 0 && newPos.x < m_width
-		&& newPos.y >= 0 && newPos.y < m_height
-		&& m_cases[newPos.x][newPos.y]->type() != "wall")
+	/* Test si la case est un mur ou si on est sur le bord du plateau */
+	if(firstNextCase.x >= 0 && firstNextCase.x < m_width
+		&& firstNextCase.y >= 0 && firstNextCase.y < m_height
+		&& m_cases[firstNextCase.x][firstNextCase.y]->type() != "wall")
+	{
+		/* Test si la case a une caisse et que la suivante est un mur ou a une caisse aussi */
+		if (m_cases[firstNextCase.x][firstNextCase.y]->hasBox())
+		{
+			if(m_cases[secondNextCase.x][secondNextCase.y]->type() != "wall"
+				&& !m_cases[secondNextCase.x][secondNextCase.y]->hasBox())
+			{
+				moveBox(firstNextCase, secondNextCase);
+				movePawn(firstNextCase);
+			}
+		}
+		else
+		{
+			movePawn(firstNextCase);
+		}
+	}
+}
+
+void Board::moveBox(const Point& origin, const Point& target)
+{
+	if(m_cases[origin.x][origin.y]->hasBox() && !m_cases[target.x][target.y]->hasBox()
+		&& m_cases[target.x][target.y]->type() != "wall" && !m_cases[target.x][target.y]->hasPawn())
+	{
+		for (int i = 0; i < m_nBoxes; ++i)
+		{
+			if(*(m_boxes[i]) == origin)
+			{
+				*(m_boxes[i]) = target;
+				break;
+			}
+		}
+		m_cases[origin.x][origin.y]->hasBox(false);
+		m_cases[target.x][target.y]->hasBox(true);
+	}
+}
+
+void Board::movePawn(const Point& target)
+{
+	if(m_cases[target.x][target.y]->type() != "wall")
 	{
 		m_cases[m_pawn.x][m_pawn.y]->hasPawn(false);
-		m_pawn = newPos;
+		m_pawn = target;
 		m_cases[m_pawn.x][m_pawn.y]->hasPawn(true);
 	}
+}
+
+bool Board::win()
+{
+	bool boxesOnTarget(true);
+	for (int i = 0; i < m_nBoxes; ++i)
+	{
+		boxesOnTarget = boxesOnTarget && (m_cases[m_boxes[i]->x][m_boxes[i]->y]->type() == "target");
+	}
+	return boxesOnTarget;
 }
 
 Case& Board::operator[](const Point& p)

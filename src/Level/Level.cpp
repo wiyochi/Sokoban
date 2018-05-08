@@ -44,7 +44,7 @@ void Level::load(const char* path)
 
 		file.close();
 
-		m_board = new Board(m_wBoard, m_hBoard, m_layout);
+		m_board = new Board(m_wBoard, m_hBoard, m_nBox, m_layout);
 
 		for (int i = 0; i < m_wBoard; ++i)
 		{
@@ -114,4 +114,9 @@ void Level::move(Dir d)
 		m_board->move(-1, 0);
 		break;
 	}
+}
+
+bool Level::win()
+{
+	return m_board->win();
 }
