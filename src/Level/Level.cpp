@@ -2,7 +2,6 @@
 
 Level::Level()
 {
-
 }
 
 Level::~Level()
@@ -99,21 +98,24 @@ void Level::draw()
 
 void Level::move(Dir d)
 {
+	bool hasMoved(false);
 	switch(d)
 	{
 	case top:
-		m_board->move(0, -1);
+		hasMoved = m_board->move(0, -1);
 		break;
 	case right:
-		m_board->move(1, 0);
+		hasMoved = m_board->move(1, 0);
 		break;
 	case bottom:
-		m_board->move(0, 1);
+		hasMoved = m_board->move(0, 1);
 		break;
 	case left:
-		m_board->move(-1, 0);
+		hasMoved = m_board->move(-1, 0);
 		break;
 	}
+	if(hasMoved)
+		m_nMove++;
 }
 
 bool Level::win()

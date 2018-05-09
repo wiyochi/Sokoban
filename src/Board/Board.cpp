@@ -70,7 +70,7 @@ void Board::draw()
 	}
 }
 
-void Board::move(int dx, int dy)
+bool Board::move(int dx, int dy)
 {
 	Point firstNextCase(m_pawn.x + dx, m_pawn.y + dy);
 	Point secondNextCase(firstNextCase.x + dx, firstNextCase.y + dy);
@@ -89,15 +89,20 @@ void Board::move(int dx, int dy)
 				moveBox(firstNextCase, secondNextCase);
 				movePawn(firstNextCase);
 			}
+			else
+				return false;
 		}
 		else
 		{
 			movePawn(firstNextCase);
 		}
 	}
+	else
+		return false;
+	return true;
 }
 
-void Board::moveBox(const Point& origin, const Point& target)
+bool Board::moveBox(const Point& origin, const Point& target)
 {
 	if(m_cases[origin.x][origin.y]->hasBox() && !m_cases[target.x][target.y]->hasBox()
 		&& m_cases[target.x][target.y]->type() != "wall" && !m_cases[target.x][target.y]->hasPawn())
@@ -113,9 +118,12 @@ void Board::moveBox(const Point& origin, const Point& target)
 		m_cases[origin.x][origin.y]->hasBox(false);
 		m_cases[target.x][target.y]->hasBox(true);
 	}
+	else
+		return false;
+	return true;
 }
 
-void Board::movePawn(const Point& target)
+bool Board::movePawn(const Point& target)
 {
 	if(m_cases[target.x][target.y]->type() != "wall")
 	{
@@ -123,6 +131,9 @@ void Board::movePawn(const Point& target)
 		m_pawn = target;
 		m_cases[m_pawn.x][m_pawn.y]->hasPawn(true);
 	}
+	else
+		return false;
+	return true;
 }
 
 bool Board::win()

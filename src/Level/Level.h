@@ -16,6 +16,7 @@ private:
 	int m_wBoard;
 	int m_hBoard;
 	int m_nBox;
+	unsigned int m_nMove;
 
 public:
 	enum Dir

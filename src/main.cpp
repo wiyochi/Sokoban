@@ -6,7 +6,7 @@ int main(int argc, char const *argv[])
 {
 	Level* l = new Level();
 
-	l->load("niveau2.txt");
+	l->load("resources/level_5.txt");
 
 	while(!l->win())
 		l->update();

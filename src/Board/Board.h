@@ -21,9 +21,9 @@ public:
 	Board(int w, int h, int nBoxes, char** layout);
 	~Board();
 	void draw();
-	void move(int dx, int dy);
-	void moveBox(const Point& origin, const Point& target);
-	void movePawn(const Point& target);
+	bool move(int dx, int dy);
+	bool moveBox(const Point& origin, const Point& target);
+	bool movePawn(const Point& target);
 	bool win();
 	Case& operator[](const Point& p);
 };
