@@ -5,6 +5,7 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <ctime>
 #include "../Board/Board.h"
 
 class Level
@@ -17,6 +18,8 @@ private:
 	int m_hBoard;
 	int m_nBox;
 	unsigned int m_nMove;
+	//std::chrono::time_point<std::chrono::system_clock> m_time;
+	int m_chrono;
 
 public:
 	enum Dir

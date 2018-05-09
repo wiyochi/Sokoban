@@ -1,7 +1,9 @@
 #include "Level.h"
 
 Level::Level(const char* path) :
-	m_nMove(0)
+	m_nMove(0),
+	m_chrono(0)
+	//m_time(std::chrono::system_clock::now())
 {
 	std::ifstream file(path, std::ios::in);
 	std::string strTmp;
@@ -57,7 +59,13 @@ Level::~Level()
 void Level::draw()
 {
 	m_board->draw();
+
+	//m_chrono = std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now()-time).count();
+
+	//time = std::chrono::system_clock::now();
+
 	std::cout << "Moves: " << m_nMove << std::endl;
+	std::cout << "Time: " << m_chrono << std::endl;
 }
 
 void Level::move(Dir d)
