@@ -2,8 +2,7 @@
 
 Level::Level(const char* path) :
 	m_nMove(0),
-	m_chrono(0)
-	//m_time(std::chrono::system_clock::now())
+    m_start(std::time(NULL))
 {
 	std::ifstream file(path, std::ios::in);
 	std::string strTmp;
@@ -28,6 +27,7 @@ Level::Level(const char* path) :
 		for (int i = 0; i < m_hBoard; ++i)
 		{
 			getline(file, strTmp);
+            
 			for (int j = 0; j < m_wBoard; ++j)
 			{
 				m_layout[j][i] = strTmp[j];
@@ -60,12 +60,9 @@ void Level::draw()
 {
 	m_board->draw();
 
-	//m_chrono = std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now()-time).count();
-
-	//time = std::chrono::system_clock::now();
 
 	std::cout << "Moves: " << m_nMove << std::endl;
-	std::cout << "Time: " << m_chrono << std::endl;
+    std::cout << "Time: " << (int)(std::difftime(std::time(NULL), m_start)) / 60 << ":" << (int) (std::difftime(std::time(NULL), m_start)) % 60 << std::endl;
 }
 
 void Level::move(Dir d)

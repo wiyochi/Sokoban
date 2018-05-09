@@ -18,8 +18,7 @@ private:
 	int m_hBoard;
 	int m_nBox;
 	unsigned int m_nMove;
-	//std::chrono::time_point<std::chrono::system_clock> m_time;
-	int m_chrono;
+	std::time_t m_start;
 
 public:
 	enum Dir
