@@ -27,10 +27,8 @@ public:
 		left
 	};
 
-	Level();
+	Level(const char* path);
 	~Level();
-	void load(const char*);
-	void update();
 	void draw();
 	void move(Dir d);
 	bool win();

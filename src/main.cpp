@@ -1,20 +1,11 @@
 #include <iostream>
-#include "Board/Board.h"
-#include "Level/Level.h"
+#include "Game.h"
 
 int main(int argc, char const *argv[])
 {
-	Level* l = new Level();
+	Game* g = new Game(5);
 
-	l->load("resources/level_5.txt");
-
-	while(!l->win())
-		l->update();
-
-	l->draw();
-	std::cout << "############### END ###############" << std::endl;
-
-	delete l;
+	g->menu();
 
 	return 0;
 }

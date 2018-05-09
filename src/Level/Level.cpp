@@ -1,16 +1,7 @@
 #include "Level.h"
 
-Level::Level()
-{
-}
-
-Level::~Level()
-{
-	if(m_board != NULL)
-		delete m_board;
-}
-
-void Level::load(const char* path)
+Level::Level(const char* path) :
+	m_nMove(0)
 {
 	std::ifstream file(path, std::ios::in);
 	std::string strTmp;
@@ -53,47 +44,20 @@ void Level::load(const char* path)
 	}
 	else
 	{
-		std::cerr << "Can't load level file" << std::endl;
+		throw std::ifstream::failure("Can't load level file");
 	}
 }
 
-void Level::update()
+Level::~Level()
 {
-	std::string input;
-	int moveDir;
-
-	draw();
-	std::cout << "-- MOVE --" << std::endl;
-	std::cout << "4:left" << std::endl;
-	std::cout << "8:top" << std::endl;
-	std::cout << "6:right" << std::endl;
-	std::cout << "2:bottom" << std::endl;
-
-	std::cin >> input;
-	std::istringstream(input) >> moveDir;
-
-	switch(moveDir)
-	{
-	case 4:
-		move(left);
-		break;
-	case 8:
-		move(top);
-		break;
-	case 6:
-		move(right);
-		break;
-	case 2:
-		move(bottom);
-		break;
-	default:
-		break;
-	}
+	if(m_board != NULL)
+		delete m_board;
 }
 
 void Level::draw()
 {
 	m_board->draw();
+	std::cout << "Moves: " << m_nMove << std::endl;
 }
 
 void Level::move(Dir d)
