@@ -108,7 +108,6 @@ void Game::nextLevel()
 void Game::restartLevel()
 {
 	loadLevel(m_nLevel);
-	startLevel();
 }
 
 void Game::menu()
@@ -131,15 +130,18 @@ void Game::menu()
 	{
 	case 1:
 		m_nLevel = 1;
+		m_end = false;
 		loadLevel(m_nLevel);
 		startLevel();
 		break;
 	case 2:
 		m_nLevel = 1;
+		m_end = false;
 		loadLevel(m_nLevel);
 		startLevel();
 		break;
 	case 3:
+		m_end = true;
 		std::cout << "See you" << std::endl;
 		break;
 	default:
