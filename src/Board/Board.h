@@ -26,6 +26,9 @@ public:
 	bool movePawn(const Point& target);
 	bool win();
 	Case& operator[](const Point& p);
+	Point getPawn();
+	Point* getBoxes();
+	int getNbBoxes();
 };
 
 #endif /*_BOARD_H_*/

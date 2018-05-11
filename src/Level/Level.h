@@ -7,6 +7,7 @@
 #include <string>
 #include <ctime>
 #include "../Board/Board.h"
+#include "../Save/Save.h"
 
 class Level
 {
@@ -19,6 +20,7 @@ private:
 	int m_nBox;
 	unsigned int m_nMove;
 	std::time_t m_start;
+	Save* m_save;
 
 public:
 	enum Dir
@@ -34,6 +36,7 @@ public:
 	void draw();
 	void move(Dir d);
 	bool win();
+	void save();
 };
 
 #endif /*_LEVEL_H_*/

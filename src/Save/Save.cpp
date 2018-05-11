@@ -12,13 +12,12 @@ Save::~Save()
 		delete[] m_saveBoxes;
 }
 
-void Save::addPawn(Point& p)
+void Save::addPawn(Point p)
 {
-	m_savePawn.x = p.x;
-	m_savePawn.y = p.y;
+	m_savePawn = p;
 }
 
-void Save::addBox(Point& p)
+void Save::addBox(Point p)
 {
 	Point* tmp = new Point[m_nbBoxes];
 	for (int i = 0; i < m_nbBoxes; ++i)
@@ -34,7 +33,7 @@ void Save::addBox(Point& p)
 	m_saveBoxes[m_nbBoxes - 1] = p;
 }
 
-void Save::saveBoxes(Point* p, int n)
+void Save::addBoxes(Point* p, int n)
 {
 	m_nbBoxes = n;
 	m_saveBoxes = new Point[n];
@@ -47,17 +46,50 @@ void Save::saveBoxes(Point* p, int n)
 
 void Save::writeSave(const char* path)
 {
-	std::ofstream file(path, std::ios::out | std::ios::ate);
+	std::ofstream file(path, std::ios::out | std::ios::trunc);
 
 	if(file)
 	{
-		file << m_nLevel << ":" << std::endl;
-		file << m_nbBoxes << "=";
+		file << m_nbBoxes << std::endl;
 		for (int i = 0; i < m_nbBoxes; ++i)
 		{
-			file << m_saveBoxes[i].x << "," << m_saveBoxes[i].y << "|";
+			file << m_saveBoxes[i].x << std::endl;
+			file << m_saveBoxes[i].y << std::endl;
 		}
-		file << std::endl << m_savePawn.x << "," << m_savePawn.y << std::endl;;
+		file << m_savePawn.x << std::endl;
+		file << m_savePawn.y << std::endl;
+
+		file.close();
+	}
+	else
+	{
+		throw std::ifstream::failure("Can't write save file");
+	}
+}
+
+void Save::readSave(const char* path, int nLevel)
+{
+	std::ifstream file(path, std::ios::in);
+	m_nLevel = nLevel;
+	std::string line;
+
+	if(file)
+	{
+		getline(file, line);
+		std::istringstream(line) >> m_nbBoxes;
+
+		for (int i = 0; i < m_nbBoxes; ++i)
+		{
+			getline(file, line);
+			std::istringstream(line) >> m_saveBoxes[i].x;
+			getline(file, line);
+			std::istringstream(line) >> m_saveBoxes[i].y;
+		}
+		getline(file, line);
+		std::istringstream(line) >> m_savePawn.x;
+		getline(file, line);
+		std::istringstream(line) >> m_savePawn.y;
+
 
 		file.close();
 	}

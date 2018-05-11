@@ -54,6 +54,8 @@ Level::~Level()
 {
 	if(m_board != NULL)
 		delete m_board;
+	if(m_save == NULL)
+		delete m_save;
 }
 
 void Level::draw()
@@ -90,4 +92,18 @@ void Level::move(Dir d)
 bool Level::win()
 {
 	return m_board->win();
+}
+
+void Level::save()
+{
+	if(m_save == NULL)
+		delete m_save;
+
+	Point* boxes = m_board->getBoxes();
+
+	m_save = new Save(m_nLevel);
+	m_save->addPawn(m_board->getPawn());
+	m_save->addBoxes(boxes, m_board->getNbBoxes());
+
+	m_save->writeSave("resources/saves/Test.txt");
 }

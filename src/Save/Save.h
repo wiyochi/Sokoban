@@ -2,6 +2,7 @@
 #define _SAVE_H_
 
 #include <string>
+#include <sstream>
 #include <fstream>
 #include "../Board/Point.h"
 
@@ -16,10 +17,11 @@ private:
 public:
 	Save(int level);
 	~Save();
-	void addPawn(Point& p);
-	void addBox(Point& p);
-	void saveBoxes(Point* p, int n);
+	void addPawn(Point p);
+	void addBox(Point p);
+	void addBoxes(Point* p, int n);
 	void writeSave(const char* path);
+	void readSave(const char* path, int nLevel);
 };
 
 #endif /* _SAVE_H_ */

@@ -17,7 +17,7 @@ void Game::loadLevel(int nLevel)
 	std::string path;
 	std::ostringstream convert;
 	convert << nLevel;
-	path.append("resources/level_");
+	path.append("resources/levels/level_");
 	path.append(convert.str());
 	path.append(".txt");
 
@@ -53,6 +53,7 @@ void Game::startLevel()
 		std::cout << "--- Actions ---" << std::endl;
 		std::cout << "r:restart" << std::endl;
 		std::cout << "q:quit" << std::endl;
+		std::cout << "s:save" << std::endl;
 
 		std::cin >> input;
 		std::istringstream(input) >> moveDir;
@@ -65,6 +66,10 @@ void Game::startLevel()
 		else if(input == "q")
 		{
 			m_end = true;
+		}
+		else if(input == "s")
+		{
+			m_level->save();
 		}
 		else
 		{

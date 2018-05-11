@@ -150,3 +150,23 @@ Case& Board::operator[](const Point& p)
 {
 	return *(m_cases[p.x][p.y]);
 }
+
+Point Board::getPawn()
+{
+	return m_pawn;
+}
+
+Point* Board::getBoxes()
+{
+	Point* boxes = new Point[m_nBoxes];
+	for (int i = 0; i < m_nBoxes; ++i)
+	{
+		boxes[i] = *(m_boxes[i]);
+	}
+	return boxes;
+}
+
+int Board::getNbBoxes()
+{
+	return m_nBoxes;
+}
