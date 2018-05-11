@@ -7,7 +7,7 @@ PRODUCT = sokoban
  
 
 #-----File Location----------------------
-SRCDST = src src/Board src/Board/Case src/Level src/Board/Entities
+SRCDST = src src/Board src/Board/Case src/Level src/Board/Entities src/Save
 OBJDST = obj/
 EXEDST = exe
  
@@ -30,7 +30,6 @@ all: $(OBJ)
 #-----Other stuff----------------------------
 depend:
 	makedepend $(CXXFLAGS) -Y $(SRC)
- 
 
 clean:
 	rm -f $(OBJPATH)

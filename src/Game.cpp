@@ -135,7 +135,7 @@ void Game::menu()
 		startLevel();
 		break;
 	case 2:
-		m_nLevel = 1;
+		m_nLevel = 5;
 		m_end = false;
 		loadLevel(m_nLevel);
 		startLevel();
