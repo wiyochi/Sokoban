@@ -105,5 +105,5 @@ void Level::save()
 	m_save->addPawn(m_board->getPawn());
 	m_save->addBoxes(boxes, m_board->getNbBoxes());
 
-	m_save->writeSave("resources/saves/Test.txt");
+	m_save->writeSave();
 }

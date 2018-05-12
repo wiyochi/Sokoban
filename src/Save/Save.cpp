@@ -44,9 +44,11 @@ void Save::addBoxes(Point* p, int n)
 	}
 }
 
-void Save::writeSave(const char* path)
+void Save::writeSave()
 {
-	std::ofstream file(path, std::ios::out | std::ios::trunc);
+	std::string path = getPath();
+
+	std::ofstream file(path.c_str(), std::ios::out | std::ios::trunc);
 
 	if(file)
 	{
@@ -62,15 +64,14 @@ void Save::writeSave(const char* path)
 		file.close();
 	}
 	else
-	{
 		throw std::ifstream::failure("Can't write save file");
-	}
 }
 
-void Save::readSave(const char* path, int nLevel)
+void Save::readSave()
 {
-	std::ifstream file(path, std::ios::in);
-	m_nLevel = nLevel;
+	std::string path = getPath();
+
+	std::ifstream file(path.c_str(), std::ios::in);
 	std::string line;
 
 	if(file)
@@ -90,11 +91,21 @@ void Save::readSave(const char* path, int nLevel)
 		getline(file, line);
 		std::istringstream(line) >> m_savePawn.y;
 
-
 		file.close();
 	}
 	else
-	{
-		throw std::ifstream::failure("Can't write save file");
-	}
+		throw std::ifstream::failure("Can't read save file");
+}
+
+std::string Save::getPath()
+{
+	std::string path;
+	std::ostringstream convert;
+	convert << m_nLevel;
+
+	path.append("resources/saves/Level_");
+	path.append(convert.str());
+	path.append(".txt");
+
+	return path;
 }

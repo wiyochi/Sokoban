@@ -20,8 +20,9 @@ public:
 	void addPawn(Point p);
 	void addBox(Point p);
 	void addBoxes(Point* p, int n);
-	void writeSave(const char* path);
-	void readSave(const char* path, int nLevel);
+	void writeSave();
+	void readSave();
+	std::string getPath();
 };
 
 #endif /* _SAVE_H_ */
