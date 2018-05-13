@@ -94,6 +94,8 @@ void Save::readSave()
 		getline(file, line);
 		std::istringstream(line) >> m_nbBoxes;
 
+		m_saveBoxes = new Point[m_nbBoxes];
+
 		for (int i = 0; i < m_nbBoxes; ++i)
 		{
 			getline(file, line);
