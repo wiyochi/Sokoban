@@ -54,7 +54,7 @@ Level::~Level()
 {
 	if(m_board != NULL)
 		delete m_board;
-	if(m_save == NULL)
+	if(m_save != NULL)
 		delete m_save;
 }
 
@@ -96,7 +96,7 @@ bool Level::win()
 
 void Level::save()
 {
-	if(m_save == NULL)
+	if(m_save != NULL)
 		delete m_save;
 
 	Point* boxes = m_board->getBoxes();
@@ -105,5 +105,39 @@ void Level::save()
 	m_save->addPawn(m_board->getPawn());
 	m_save->addBoxes(boxes, m_board->getNbBoxes());
 
-	m_save->writeSave();
+	try
+	{
+		m_save->writeSave();
+	}
+	catch(std::ifstream::failure e)
+	{
+		std::cerr << "Error while saving level" << std::endl;
+	}
+}
+
+void Level::load()
+{
+	if(m_save == NULL)
+		m_save = new Save(m_nLevel);
+
+	try
+	{
+		m_save->readSave();
+	}
+	catch(std::ifstream::failure e)
+	{
+		std::cerr << "Error while loading level" << std::endl;
+		delete m_save;
+	}
+
+	if(m_save != NULL)
+	{
+		const Point* boxes = m_save->getBoxes();
+		int nbBoxes = m_save->getNbBoxes();
+		Point pawn = m_save->getPawn();
+
+		m_board->placeBoxes(boxes, nbBoxes);
+		m_board->movePawn(pawn);
+	}
+
 }

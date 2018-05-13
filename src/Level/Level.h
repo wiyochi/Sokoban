@@ -37,6 +37,7 @@ public:
 	void move(Dir d);
 	bool win();
 	void save();
+	void load();
 };
 
 #endif /*_LEVEL_H_*/

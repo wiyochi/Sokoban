@@ -136,6 +136,26 @@ bool Board::movePawn(const Point& target)
 	return true;
 }
 
+void Board::placeBoxes(const Point* boxes, int nBoxes)
+{
+	for (int i = 0; i < m_nBoxes; ++i)
+	{
+		m_cases[m_boxes[i]->x][m_boxes[i]->y]->hasBox(false);
+		delete m_boxes[i];
+	}
+	delete m_boxes;
+
+	m_nBoxes = nBoxes;
+	m_boxes = new Point*[m_nBoxes];
+
+	for (int i = 0; i < m_nBoxes; ++i)
+	{
+		m_boxes[i] = new Point(boxes[i]);
+		if(m_cases[m_boxes[i]->x][m_boxes[i]->y]->type() != "wall")
+			m_cases[m_boxes[i]->x][m_boxes[i]->y]->hasBox(true);
+	}
+}
+
 bool Board::win()
 {
 	bool boxesOnTarget(true);

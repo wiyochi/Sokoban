@@ -24,6 +24,7 @@ public:
 	bool move(int dx, int dy);
 	bool moveBox(const Point& origin, const Point& target);
 	bool movePawn(const Point& target);
+	void placeBoxes(const Point* boxes, int nBoxes);
 	bool win();
 	Case& operator[](const Point& p);
 	Point getPawn();

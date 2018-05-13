@@ -39,10 +39,25 @@ void Save::addBoxes(Point* p, int n)
 	m_saveBoxes = new Point[n];
 	for (int i = 0; i < n; ++i)
 	{
-		m_saveBoxes[i].x = p[i].x;
-		m_saveBoxes[i].y = p[i].y;
+		m_saveBoxes[i] = p[i];
 	}
 }
+
+const Point& Save::getPawn()
+{
+	return m_savePawn;
+}
+
+const Point* Save::getBoxes()
+{
+	return m_saveBoxes;
+}
+
+int Save::getNbBoxes()
+{
+	return m_nbBoxes;
+}
+
 
 void Save::writeSave()
 {

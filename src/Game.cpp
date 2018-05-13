@@ -54,6 +54,7 @@ void Game::startLevel()
 		std::cout << "r:restart" << std::endl;
 		std::cout << "q:quit" << std::endl;
 		std::cout << "s:save" << std::endl;
+		std::cout << "l:load save" << std::endl;
 
 		std::cin >> input;
 		std::istringstream(input) >> moveDir;
@@ -64,13 +65,11 @@ void Game::startLevel()
 			restartLevel();
 		}
 		else if(input == "q")
-		{
 			m_end = true;
-		}
 		else if(input == "s")
-		{
 			m_level->save();
-		}
+		else if(input == "l")
+			m_level->load();
 		else
 		{
 			switch(moveDir)
