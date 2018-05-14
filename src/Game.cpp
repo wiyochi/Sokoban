@@ -99,7 +99,14 @@ void Game::startLevel()
 		nextLevel();
 	}
 	else
+	{
+		try {
+			saveNLevel();
+		} catch (std::ifstream::failure e) {
+			std::cerr << "Error while saving current level save file" << std::endl;
+		}
 		menu();
+	}
 }
 
 void Game::nextLevel()
@@ -133,13 +140,18 @@ void Game::menu()
 	switch(moveDir)
 	{
 	case 1:
-		m_nLevel = 1;
+		try {
+			m_nLevel = getNLevel();
+		} catch(std::ifstream::failure e) {
+			std::cerr << "Error while loading current level save file" << std::endl;
+			m_nLevel = 1;
+		}
 		m_end = false;
 		loadLevel(m_nLevel);
 		startLevel();
 		break;
 	case 2:
-		m_nLevel = 5;
+		m_nLevel = 1;
 		m_end = false;
 		loadLevel(m_nLevel);
 		startLevel();
@@ -151,4 +163,35 @@ void Game::menu()
 	default:
 		break;
 	}
+}
+
+void Game::saveNLevel()
+{
+	std::ofstream file("resources/currentLevel.txt", std::ios::out | std::ios::trunc);
+
+	if(file)
+	{
+		file << m_nLevel << std::endl;
+		file.close();
+	}
+	else
+		throw std::ifstream::failure("Can't write current level save file");
+}
+
+int Game::getNLevel()
+{
+	std::ifstream file("resources/currentLevel.txt", std::ios::in);
+	std::string line;
+	int nLevel;
+
+	if(file)
+	{
+		getline(file, line);
+		std::istringstream(line) >> nLevel;
+		file.close();
+	}
+	else
+		throw std::ifstream::failure("Can't read current level save file");
+
+	return nLevel;
 }

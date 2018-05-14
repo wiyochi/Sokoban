@@ -22,6 +22,8 @@ public:
 	void nextLevel();
 	void restartLevel();
 	void menu();
+	void saveNLevel();
+	int getNLevel();
 };
 
 
