@@ -5,6 +5,7 @@
 #include <sstream>
 #include <fstream>
 #include "../Board/Point.h"
+#include "Stack.h"
 
 class Save
 {
