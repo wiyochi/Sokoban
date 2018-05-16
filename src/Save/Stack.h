@@ -20,6 +20,8 @@ public :
     
     void push(char c);
     char pull();
+    
+    bool isEmpty();
 };
 
 #endif /* _SAVE_H_ */

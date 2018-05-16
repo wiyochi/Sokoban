@@ -38,7 +38,7 @@ char Stack::pull()
             delete this;
             return c;
         } 
-        else if (NULL == m_s && NULL == m_ps) 
+        else if (isEmpty()) 
         {
             return '-';
         }
@@ -47,4 +47,9 @@ char Stack::pull()
             m_s->pull();
         }
     
+}
+
+bool isEmpty()
+{
+    return NULL == m_s && NULL == m_ps;
 }
