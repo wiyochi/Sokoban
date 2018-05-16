@@ -49,7 +49,7 @@ char Stack::pull()
     
 }
 
-bool isEmpty()
+bool Stack::isEmpty()
 {
     return NULL == m_s && NULL == m_ps;
 }
