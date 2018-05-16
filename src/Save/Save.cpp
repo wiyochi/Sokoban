@@ -1,9 +1,9 @@
 #include "Save.h"
 
 Save::Save(int level) :
-	m_savePawn(),
 	m_nLevel(level)
 {
+    m_input = new Stack();
 }
 
 Save::~Save()
@@ -12,52 +12,10 @@ Save::~Save()
 		delete[] m_saveBoxes;
 }
 
-void Save::addPawn(Point p)
+void Save::addInput(char c)
 {
-	m_savePawn = p;
+	m_input->push(c);
 }
-
-void Save::addBox(Point p)
-{
-	Point* tmp = new Point[m_nbBoxes];
-	for (int i = 0; i < m_nbBoxes; ++i)
-		tmp[i] = m_saveBoxes[i];
-	delete[] m_saveBoxes;
-
-	m_nbBoxes++;
-	m_saveBoxes = new Point[m_nbBoxes];
-	for (int i = 0; i < m_nbBoxes - 1; ++i)
-		m_saveBoxes[i] = tmp[i];
-	delete[] tmp;
-
-	m_saveBoxes[m_nbBoxes - 1] = p;
-}
-
-void Save::addBoxes(Point* p, int n)
-{
-	m_nbBoxes = n;
-	m_saveBoxes = new Point[n];
-	for (int i = 0; i < n; ++i)
-	{
-		m_saveBoxes[i] = p[i];
-	}
-}
-
-const Point& Save::getPawn()
-{
-	return m_savePawn;
-}
-
-const Point* Save::getBoxes()
-{
-	return m_saveBoxes;
-}
-
-int Save::getNbBoxes()
-{
-	return m_nbBoxes;
-}
-
 
 void Save::writeSave()
 {
@@ -67,15 +25,9 @@ void Save::writeSave()
 
 	if(file)
 	{
-		file << m_nbBoxes << std::endl;
-		for (int i = 0; i < m_nbBoxes; ++i)
-		{
-			file << m_saveBoxes[i].x << std::endl;
-			file << m_saveBoxes[i].y << std::endl;
-		}
-		file << m_savePawn.x << std::endl;
-		file << m_savePawn.y << std::endl;
-
+        while (!m_input->isEmpty())
+            file << m_input->pull() << std::endl;
+        
 		file.close();
 	}
 	else
@@ -91,23 +43,8 @@ void Save::readSave()
 
 	if(file)
 	{
-		getline(file, line);
-		std::istringstream(line) >> m_nbBoxes;
-
-		m_saveBoxes = new Point[m_nbBoxes];
-
-		for (int i = 0; i < m_nbBoxes; ++i)
-		{
-			getline(file, line);
-			std::istringstream(line) >> m_saveBoxes[i].x;
-			getline(file, line);
-			std::istringstream(line) >> m_saveBoxes[i].y;
-		}
-		getline(file, line);
-		std::istringstream(line) >> m_savePawn.x;
-		getline(file, line);
-		std::istringstream(line) >> m_savePawn.y;
-
+		while (getline(file, line))
+            m_input->push(line[0]);
 		file.close();
 	}
 	else
