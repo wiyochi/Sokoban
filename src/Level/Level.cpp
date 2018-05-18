@@ -38,11 +38,7 @@ Level::Level(const char* path) :
 
 		m_board = new Board(m_wBoard, m_hBoard, m_nBox, m_layout);
 
-		for (int i = 0; i < m_wBoard; ++i)
-		{
-			delete[] m_layout[i];
-		}
-		delete[] m_layout;
+		
 	}
 	else
 	{
@@ -54,6 +50,12 @@ Level::Level(const char* path) :
 
 Level::~Level()
 {
+    for (int i = 0; i < m_wBoard; ++i)
+		{
+			delete[] m_layout[i];
+		}
+    delete[] m_layout;
+    
 	if(m_board != NULL)
 		delete m_board;
 	if(m_save != NULL)
@@ -71,24 +73,30 @@ void Level::draw()
 
 void Level::move(Dir d)
 {
-	bool hasMoved(false);
 	switch(d)
 	{
 	case top:
-		hasMoved = m_board->move(0, -1);
+		m_board->move(0, -1);
+        m_save->addInput(d);
 		break;
 	case right:
-		hasMoved = m_board->move(1, 0);
+		m_board->move(1, 0);
+        m_save->addInput(d);
 		break;
 	case bottom:
-		hasMoved = m_board->move(0, 1);
+		m_board->move(0, 1);
+        m_save->addInput(d);
 		break;
 	case left:
-		hasMoved = m_board->move(-1, 0);
-		break;
+		m_board->move(-1, 0);
+		m_save->addInput(d);
+        break;
+    case back:
+        m_save->removeInput();
+        break;
 	}
-	if(hasMoved)
-		m_nMove++;
+	
+    m_nMove++;
 }
 
 bool Level::win()
@@ -98,11 +106,8 @@ bool Level::win()
 
 void Level::save()
 {
-	Point* boxes = m_board->getBoxes();
-
-	m_save->addPawn(m_board->getPawn());
-	m_save->addBoxes(boxes, m_board->getNbBoxes());
-
+    m_save->setNbMove(m_nMove);
+    m_save->setTimer(std::difftime(std::time(NULL), m_start));
 	try
 	{
 		m_save->writeSave();
@@ -119,12 +124,8 @@ void Level::load()
 	{
 		m_save->readSave();
 
-		const Point* boxes = m_save->getBoxes();
-		int nbBoxes = m_save->getNbBoxes();
-		Point pawn = m_save->getPawn();
-
-		m_board->placeBoxes(boxes, nbBoxes);
-		m_board->movePawn(pawn);
+        m_nMove = m_save->getNbMove();
+        m_start = std::difftime(m_start, std::time(NULL));
 	}
 	catch(std::ifstream::failure e)
 	{

@@ -28,7 +28,8 @@ public:
 		top,
 		right,
 		bottom,
-		left
+		left,
+        back
 	};
 
 	Level(const char* path);

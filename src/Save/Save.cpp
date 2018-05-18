@@ -1,21 +1,45 @@
 #include "Save.h"
 
 Save::Save(int level) :
-	m_nLevel(level)
+	m_nLevel(level), m_nbMove(0), m_timer(0)
 {
     m_input = new Stack();
 }
 
 Save::~Save()
 {
-	if(m_saveBoxes != NULL)
-		delete[] m_saveBoxes;
+}
+
+void Save::setNbMove(int nbMove)
+{
+    m_nbMove = nbMove;
+}
+
+int Save::getNbMove()
+{
+    return m_nbMove;
+}
+
+void Save::setTimer(std::time_t timer)
+{
+    m_timer = timer;
+}
+
+std::time_t Save::getTimer() 
+{
+    return m_timer;
 }
 
 void Save::addInput(char c)
 {
 	m_input->push(c);
 }
+
+void Save::removeInput()
+{
+	m_input->pull();
+}
+
 
 void Save::writeSave()
 {
@@ -25,6 +49,8 @@ void Save::writeSave()
 
 	if(file)
 	{
+        file << m_nbMove << std::endl;
+        file << m_timer << std::endl;
         while (!m_input->isEmpty())
             file << m_input->pull() << std::endl;
         
@@ -43,9 +69,17 @@ void Save::readSave()
 
 	if(file)
 	{
+        getline(file, line);
+		std::istringstream(line) >> m_nbMove;
+        
+        getline(file, line);
+		std::istringstream(line) >> m_timer;
+        
 		while (getline(file, line))
             m_input->push(line[0]);
 		file.close();
+        
+        while (
 	}
 	else
 		throw std::ifstream::failure("Can't read save file");
