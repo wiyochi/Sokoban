@@ -29,29 +29,27 @@ void Stack::push(char c)
 
 char Stack::pull()
 {
-    
-       
-        if (NULL == m_s && NULL != m_ps) 
-        {
-            char c = m_c;
-            m_ps->m_s = NULL;
-            delete this;
-            return c;
-        } 
-        else if (isEmpty()) 
-        {
-            return '-';
-        }
-        else
-        {
-            m_s->pull();
-        }
+    if (NULL == m_s && NULL != m_ps) 
+    {
+        char c = m_c;
+        m_ps->m_s = NULL;
+        delete this;
+        return c;
+    } 
+    else if (isEmpty()) 
+    {
+        return '-';
+    }
+    else
+    {
+        m_s->pull();
+    }
     
 }
 
 char Stack::getI(int i) 
 {
-    if (i <= 0) 
+    if (i < 0) 
         return m_c;
     else 
     {

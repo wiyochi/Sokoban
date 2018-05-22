@@ -125,7 +125,29 @@ void Level::load()
 		m_save->readSave();
 
         m_nMove = m_save->getNbMove();
-        m_start = std::difftime(m_start, std::time(NULL));
+        m_start = std::time(NULL) - m_save->getTimer();
+
+        m_board->movePawn(m_board->getStartPawn());
+        m_board->placeBoxes(m_board->getStartsBoxes(), m_board->getNbBoxes());
+
+        for (int i = 0; i < m_save->getNbInput(); ++i)
+        {
+        	switch(m_save->getInput(i))
+			{
+			case '8':
+				m_board->move(0, -1);
+				break;
+			case '6':
+				m_board->move(1, 0);
+				break;
+			case '2':
+				m_board->move(0, 1);
+				break;
+			case '4':
+				m_board->move(-1, 0);
+		        break;
+			}
+        }
 	}
 	catch(std::ifstream::failure e)
 	{

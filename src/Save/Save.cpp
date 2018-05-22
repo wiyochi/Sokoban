@@ -40,6 +40,15 @@ void Save::removeInput()
 	m_input->pull();
 }
 
+int Save::getNbInput()
+{
+	return m_input->size();
+}
+
+char Save::getInput(int i)
+{
+	return m_input->getI(i);
+}
 
 void Save::writeSave()
 {
@@ -49,15 +58,15 @@ void Save::writeSave()
 
 	if(file)
 	{
-        std::cout << "TETETE" << std::endl;
         file << m_nbMove << std::endl;
         file << m_timer << std::endl;
-        std::cout << "TETETE" << std::endl;
-        for (int i = 0; i < m_input->size(); i++) {
-            
-        std::cout << i << std::endl;
+
+        std::cout << "m_input->size(): " << m_input->size() << std::endl;
+
+        for (int i = 0; i < m_input->size(); i++)
+        {
+        	std::cout << "m_input " << i << ": " << m_input->getI(i) << std::endl;
             file << m_input->getI(i) << std::endl;
-        std::cout << i << std::endl;
         }
         
 		file.close();
@@ -82,6 +91,9 @@ void Save::readSave()
         getline(file, line);
 		std::istringstream(line) >> m_timer;
         
+		delete m_input;
+		m_input = new Stack();
+
 		while (getline(file, line))
             m_input->push(line[0]);
 		file.close();

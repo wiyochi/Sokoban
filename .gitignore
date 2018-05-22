@@ -1,1 +1,12 @@
-obj/
+obj/Board.o
+obj/Case.o
+obj/Game.o
+obj/Level.o
+obj/main.o
+obj/Pawn.o
+obj/Point.o
+obj/Save.o
+obj/Stack.o
+obj/Target.o
+obj/Wall.o
+exe/sokoban

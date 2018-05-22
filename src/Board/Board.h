@@ -16,6 +16,8 @@ private:
 	int m_nBoxes;
 	Point m_pawn;
 	Point** m_boxes;
+	Point m_startPawn;
+	Point** m_startsBoxes;
 
 public:
 	Board(int w, int h, int nBoxes, char** layout);
@@ -30,6 +32,8 @@ public:
 	Point getPawn();
 	Point* getBoxes();
 	int getNbBoxes();
+	Point getStartPawn();
+	Point* getStartsBoxes();
 };
 
 #endif /*_BOARD_H_*/

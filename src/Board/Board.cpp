@@ -7,6 +7,7 @@ Board::Board(int w, int h, int nBoxes, char** layout) :
 {
 	int indexBoxes(0);
 	m_boxes = new Point*[m_nBoxes];
+	m_startsBoxes = new Point*[m_nBoxes];
 
 	m_cases = new Case**[m_width];
 	for (int i = 0; i < m_width; ++i)
@@ -29,11 +30,13 @@ Board::Board(int w, int h, int nBoxes, char** layout) :
 					m_cases[i][j] = new Case(*(new Point(i, j)));
 					m_cases[i][j]->hasPawn(true);
 					m_pawn = Point(i, j);
+					m_startPawn = Point(i, j);
 					break;
 				case '$':
 					m_cases[i][j] = new Case(*(new Point(i, j)));
 					m_cases[i][j]->hasBox(true);
 					m_boxes[indexBoxes] = new Point(i, j);
+					m_startsBoxes[indexBoxes] = new Point(i, j);
 					indexBoxes++;
 					break;
 				default:
@@ -189,4 +192,19 @@ Point* Board::getBoxes()
 int Board::getNbBoxes()
 {
 	return m_nBoxes;
+}
+
+Point Board::getStartPawn()
+{
+	return m_startPawn;
+}
+
+Point* Board::getStartsBoxes()
+{
+	Point* boxes = new Point[m_nBoxes];
+	for (int i = 0; i < m_nBoxes; ++i)
+	{
+		boxes[i] = *(m_startsBoxes[i]);
+	}
+	return boxes;
 }

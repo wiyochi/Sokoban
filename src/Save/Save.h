@@ -27,6 +27,8 @@ public:
     
     void addInput(char c);
     void removeInput();
+    int getNbInput();
+    char getInput(int i);
 	void writeSave();
 	void readSave();
 	std::string getPath();
