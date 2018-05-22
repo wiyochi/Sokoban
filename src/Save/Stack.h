@@ -20,6 +20,7 @@ public :
     
     void push(char c);
     char pull();
+    char getI(int i);
     
     bool isEmpty();
 };
