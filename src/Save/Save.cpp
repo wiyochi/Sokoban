@@ -51,8 +51,8 @@ void Save::writeSave()
 	{
         file << m_nbMove << std::endl;
         file << m_timer << std::endl;
-        while (!m_input->isEmpty())
-            file << m_input->pull() << std::endl;
+        for (int i = 1; !m_input->isEmpty(); i++)
+            file << m_input->getI(i) << std::endl;
         
 		file.close();
 	}
@@ -78,8 +78,6 @@ void Save::readSave()
 		while (getline(file, line))
             m_input->push(line[0]);
 		file.close();
-        
-        while (
 	}
 	else
 		throw std::ifstream::failure("Can't read save file");
