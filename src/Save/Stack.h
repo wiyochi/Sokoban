@@ -22,6 +22,7 @@ public :
     char pull();
     char getI(int i);
     
+    int size();
     bool isEmpty();
 };
 

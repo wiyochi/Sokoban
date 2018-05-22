@@ -77,19 +77,19 @@ void Level::move(Dir d)
 	{
 	case top:
 		m_board->move(0, -1);
-        m_save->addInput(d);
+        m_save->addInput('8');
 		break;
 	case right:
 		m_board->move(1, 0);
-        m_save->addInput(d);
+        m_save->addInput('6');
 		break;
 	case bottom:
 		m_board->move(0, 1);
-        m_save->addInput(d);
+        m_save->addInput('2');
 		break;
 	case left:
 		m_board->move(-1, 0);
-		m_save->addInput(d);
+		m_save->addInput('4');
         break;
     case back:
         m_save->removeInput();

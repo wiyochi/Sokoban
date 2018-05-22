@@ -49,12 +49,19 @@ void Save::writeSave()
 
 	if(file)
 	{
+        std::cout << "TETETE" << std::endl;
         file << m_nbMove << std::endl;
         file << m_timer << std::endl;
-        for (int i = 1; !m_input->isEmpty(); i++)
+        std::cout << "TETETE" << std::endl;
+        for (int i = 0; i < m_input->size(); i++) {
+            
+        std::cout << i << std::endl;
             file << m_input->getI(i) << std::endl;
+        std::cout << i << std::endl;
+        }
         
 		file.close();
+        
 	}
 	else
 		throw std::ifstream::failure("Can't write save file");
