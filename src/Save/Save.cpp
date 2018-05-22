@@ -49,12 +49,19 @@ void Save::writeSave()
 
 	if(file)
 	{
+        std::cout << "TETETE" << std::endl;
         file << m_nbMove << std::endl;
         file << m_timer << std::endl;
-        while (!m_input->isEmpty())
-            file << m_input->pull() << std::endl;
+        std::cout << "TETETE" << std::endl;
+        for (int i = 0; i < m_input->size(); i++) {
+            
+        std::cout << i << std::endl;
+            file << m_input->getI(i) << std::endl;
+        std::cout << i << std::endl;
+        }
         
 		file.close();
+        
 	}
 	else
 		throw std::ifstream::failure("Can't write save file");
@@ -78,8 +85,6 @@ void Save::readSave()
 		while (getline(file, line))
             m_input->push(line[0]);
 		file.close();
-        
-        while (
 	}
 	else
 		throw std::ifstream::failure("Can't read save file");

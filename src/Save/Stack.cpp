@@ -49,7 +49,33 @@ char Stack::pull()
     
 }
 
+char Stack::getI(int i) 
+{
+    if (i <= 0) 
+        return m_c;
+    else 
+    {
+        Stack * stack = this->m_s;
+        for (int j = 0; j < i; j++) 
+            stack = stack->m_s;
+        return stack->m_c;
+    }
+}
+
 bool Stack::isEmpty()
 {
     return NULL == m_s && NULL == m_ps;
+}
+
+int Stack::size()
+{
+    int i = 0;
+    Stack * s = new Stack();
+    while (!isEmpty()) {
+        i++;
+        s->push(pull());
+    }
+    while (!s->isEmpty())
+        push(s->pull());
+    return i;
 }

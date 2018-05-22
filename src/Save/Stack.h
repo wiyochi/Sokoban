@@ -20,7 +20,9 @@ public :
     
     void push(char c);
     char pull();
+    char getI(int i);
     
+    int size();
     bool isEmpty();
 };
 
