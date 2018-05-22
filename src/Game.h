@@ -13,6 +13,7 @@ private:
 	int m_nLevel;
 	Level* m_level;
 	bool m_end;
+	bool m_quit;
 
 public:
 	Game(int nbLevel);
@@ -22,6 +23,7 @@ public:
 	void nextLevel();
 	void restartLevel();
 	void menu();
+	int levelMenu();
 	void saveNLevel();
 	int getNLevel();
 };

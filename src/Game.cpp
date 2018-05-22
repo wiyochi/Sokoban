@@ -105,7 +105,6 @@ void Game::startLevel()
 		} catch (std::ifstream::failure e) {
 			std::cerr << "Error while saving current level save file" << std::endl;
 		}
-		menu();
 	}
 }
 
@@ -124,45 +123,83 @@ void Game::restartLevel()
 void Game::menu()
 {
 	std::string input;
-	int moveDir;
+	int choice;
 
-	while(moveDir != 1 && moveDir != 2 && moveDir != 3)
+	while(!m_quit)
 	{
-		std::cout << "--- Menu ---" << std::endl;
-		std::cout << "1:current game" << std::endl;
-		std::cout << "2:new game" << std::endl;
-		std::cout << "3:quit game" << std::endl;
+		choice = 0;
+
+		while(choice != 1 && choice != 2 && choice != 3 && choice != 4)
+		{
+			std::cout << "--- Menu ---" << std::endl;
+			std::cout << "1:current game" << std::endl;
+			std::cout << "2:new game" << std::endl;
+			std::cout << "3:level menu" << std::endl;
+			std::cout << "4:quit game" << std::endl;
+
+			std::cin >> input;
+			std::istringstream(input) >> choice;
+		}
+
+		switch(choice)
+		{
+		case 1:
+			try {
+				m_nLevel = getNLevel();
+			} catch(std::ifstream::failure e) {
+				std::cerr << "Error while loading current level save file" << std::endl;
+				m_nLevel = 1;
+			}
+			m_end = false;
+			loadLevel(m_nLevel);
+			startLevel();
+			break;
+		case 2:
+			m_nLevel = 1;
+			m_end = false;
+			loadLevel(m_nLevel);
+			startLevel();
+			break;
+		case 3:
+			m_nLevel = levelMenu();
+			if(m_nLevel != -1)
+			{
+				m_end = false;
+				loadLevel(m_nLevel);
+				startLevel();
+			}
+			break;
+		case 4:
+			m_quit = true;
+			std::cout << "See you" << std::endl;
+			break;
+		}
+	}
+}
+
+int Game::levelMenu()
+{
+	std::string input;
+	int choice;
+
+	do
+	{
+		std::cout << "--- Level menu ---" << std::endl;
+		for (int i = 0; i < m_nbLevel; ++i)
+		{
+			std::cout << "Level " << i + 1 << std::endl;
+		}
+		std::cout << "b:back to main menu" << std::endl;
 
 		std::cin >> input;
-		std::istringstream(input) >> moveDir;
-	}
 
-	switch(moveDir)
-	{
-	case 1:
-		try {
-			m_nLevel = getNLevel();
-		} catch(std::ifstream::failure e) {
-			std::cerr << "Error while loading current level save file" << std::endl;
-			m_nLevel = 1;
-		}
-		m_end = false;
-		loadLevel(m_nLevel);
-		startLevel();
-		break;
-	case 2:
-		m_nLevel = 1;
-		m_end = false;
-		loadLevel(m_nLevel);
-		startLevel();
-		break;
-	case 3:
-		m_end = true;
-		std::cout << "See you" << std::endl;
-		break;
-	default:
-		break;
-	}
+		if(input == "b")
+			return -1;
+
+		std::istringstream(input) >> choice;
+	} while(choice < 0 || choice > m_nbLevel);
+
+	return choice - 1;
 }
 
 void Game::saveNLevel()
