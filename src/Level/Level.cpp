@@ -93,6 +93,7 @@ void Level::move(Dir d)
         break;
     case back:
         m_save->removeInput();
+        replay();
         break;
 	}
 	
@@ -127,31 +128,36 @@ void Level::load()
         m_nMove = m_save->getNbMove();
         m_start = std::time(NULL) - m_save->getTimer();
 
-        m_board->movePawn(m_board->getStartPawn());
-        m_board->placeBoxes(m_board->getStartsBoxes(), m_board->getNbBoxes());
-
-        for (int i = 0; i < m_save->getNbInput(); ++i)
-        {
-        	switch(m_save->getInput(i))
-			{
-			case '8':
-				m_board->move(0, -1);
-				break;
-			case '6':
-				m_board->move(1, 0);
-				break;
-			case '2':
-				m_board->move(0, 1);
-				break;
-			case '4':
-				m_board->move(-1, 0);
-		        break;
-			}
-        }
+        replay();
 	}
 	catch(std::ifstream::failure e)
 	{
 		std::cerr << "Error while loading save level" << std::endl;
 	}
 
+}
+
+void Level::replay()
+{
+	m_board->movePawn(m_board->getStartPawn());
+    m_board->placeBoxes(m_board->getStartsBoxes(), m_board->getNbBoxes());
+
+    for (int i = 0; i < m_save->getNbInput(); ++i)
+    {
+    	switch(m_save->getInput(i))
+    	{
+		case '8':
+			m_board->move(0, -1);
+			break;
+		case '6':
+			m_board->move(1, 0);
+			break;
+		case '2':
+			m_board->move(0, 1);
+			break;
+		case '4':
+			m_board->move(-1, 0);
+	        break;
+		}
+    }
 }

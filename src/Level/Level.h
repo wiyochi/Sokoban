@@ -39,6 +39,7 @@ public:
 	bool win();
 	void save();
 	void load();
+	void replay();
 };
 
 #endif /*_LEVEL_H_*/

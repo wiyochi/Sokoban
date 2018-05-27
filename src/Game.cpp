@@ -50,6 +50,7 @@ void Game::startLevel()
 		std::cout << "8:top" << std::endl;
 		std::cout << "6:right" << std::endl;
 		std::cout << "2:bottom" << std::endl;
+		std::cout << "7:back" << std::endl;
 		std::cout << "--- Actions ---" << std::endl;
 		std::cout << "r:restart" << std::endl;
 		std::cout << "q:quit" << std::endl;
@@ -85,6 +86,9 @@ void Game::startLevel()
 				break;
 			case 2:
 				m_level->move(Level::bottom);
+				break;
+			case 7:
+				m_level->move(Level::back);
 				break;
 			default:
 				break;
@@ -199,7 +203,7 @@ int Game::levelMenu()
 		std::istringstream(input) >> choice;
 	} while(choice < 0 || choice > m_nbLevel);
 
-	return choice - 1;
+	return choice;
 }
 
 void Game::saveNLevel()
