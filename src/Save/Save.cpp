@@ -61,11 +61,8 @@ void Save::writeSave()
         file << m_nbMove << std::endl;
         file << m_timer << std::endl;
 
-        std::cout << "m_input->size(): " << m_input->size() << std::endl;
-
         for (int i = 0; i < m_input->size(); i++)
         {
-        	std::cout << "m_input " << i << ": " << m_input->getI(i) << std::endl;
             file << m_input->getI(i) << std::endl;
         }
         

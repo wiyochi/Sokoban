@@ -66,7 +66,10 @@ void Game::startLevel()
 			restartLevel();
 		}
 		else if(input == "q")
+		{
+			m_level->save();
 			m_end = true;
+		}
 		else if(input == "s")
 			m_level->save();
 		else if(input == "l")
@@ -156,6 +159,7 @@ void Game::menu()
 			}
 			m_end = false;
 			loadLevel(m_nLevel);
+			m_level->load();
 			startLevel();
 			break;
 		case 2:
